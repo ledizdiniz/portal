@@ -24,7 +24,7 @@ def get_all_artigos():
         output.append({ 'id':str(q['_id']) ,'Titulo' : q['titulo'], 'data' : q['data'],'texto' : q['texto'], 'autor' : q['autor']['nome']  })
 
     tam = len(output)
-    print(tam)
+
     return render_template('lista2.html', titulo='Blog', lista=output,tamanho=tam)
 
 @app.route('/artigos/<texto>', methods=['GET'])
@@ -124,6 +124,24 @@ def inserirautor():
 @app.route('/', methods=['GET'])
 def inicio():
       return redirect('/artigos')
+
+
+#### -----api cruas em json
+
+@app.route('/artigosapi', methods=['GET'])
+def get_all_artigosapi():
+    output = []
+    for q in artigos.find():
+        output.append({ 'id':str(q['_id']) ,'Titulo' : q['titulo'], 'data' : q['data'],'texto' : q['texto'], 'autor' : q['autor']['nome']  })
+
+
+
+    return jsonify(output)
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
