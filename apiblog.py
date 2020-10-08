@@ -134,11 +134,20 @@ def get_all_artigosapi():
     for q in artigos.find():
         output.append({ 'id':str(q['_id']) ,'Titulo' : q['titulo'], 'data' : q['data'],'texto' : q['texto'], 'autor' : q['autor']['nome']  })
 
-
-
     return jsonify(output)
 
+@app.route('/artigosapi/<texto>', methods=['GET'])
+def get_search_artigoapi(texto):
 
+    output = []
+    for q in artigos.find(
+            {"$or": [{"titulo": {'$regex': texto}}, {"texto": {'$regex': texto}}, {"autor.nome": {'$regex': texto}}]}):
+
+             output.append({'id':str(q['_id']) ,'Titulo': q['titulo'], 'texto': q['texto'], 'autor': q['autor']['nome']})
+
+    tam = len(output)
+    print(tam)
+    return jsonify(output)
 
 
 
