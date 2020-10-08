@@ -1,0 +1,66 @@
+{% extends "template.html" %}
+<!--criamos um bloco de conteúdo a ser interpretado pelo python-->
+{% block conteudo %}
+
+ <div class="container">
+ <form action="{{ url_for('get_search_artigos') }}" method="post">
+        <fieldset>
+          <div class="form-group">
+
+            <input type="text" id="texto" name="texto" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary btn-salvar">Pesquisar</button>
+                <a class="btn btn-primary" href="/novo" role="button">Novo artigo </a>
+                <a class="btn btn-primary" href="/novoautor" role="button">Cadastrar autor </a>
+
+
+        </fieldset>
+
+    </form>
+
+{% for dados in lista  %}
+
+<!-- details card section starts from here -->
+<section class="details-card" >
+    <div class="container">
+       <div class="container">
+           <div class="row">
+            <div class="col-md-4">
+                <div class="card-content">
+
+                   <h4></h4>
+                    <div class="card-img">
+                        <img src="/static/foto.jpg" alt="" width="380" height="230">
+                        <span><h4>Autor: {{ dados.autor }}</h4></span>
+                    </div>
+                    <div class="card-desc">
+                        <h3>{{ dados.Titulo }}</h3>
+                        <p>{{ dados.texto }}
+                            </p>
+
+                         <a class="btn btn-primary" role="button id="remover" href="http://127.0.0.1:5000/remover/{{ dados.id }}">Remover</a>
+                         <a class="btn btn-primary" role="button id="Atualizar" href="http://127.0.0.1:5000/atualizar/{{ dados.id }}">Atualizar</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</section>
+<!-- details card section starts from here -->
+{% endfor %}
+
+
+
+
+        <!--encerramos a estrutura de repetição-->
+
+
+{% endblock %}
+<!--encerramos o bloco de código a ser interpretado pelo python-->
+
+
