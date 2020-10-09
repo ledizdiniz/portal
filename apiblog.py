@@ -21,12 +21,7 @@ autores = mongo.db.autores
 def get_all_artigos():
 
     output = get_all_artigosapi().json
-    #output = []
-    #for q in artigos.find():
-    #    output.append({ 'id':str(q['_id']) ,'Titulo' : q['titulo'], 'data' : q['data'],'texto' : q['texto'], 'autor' : q['autor']['nome']  })
-
     tam = len(output)
-
     return render_template('lista2.html', titulo='Blog', lista=output,tamanho=tam)
 
 @app.route('/artigos/<texto>', methods=['GET'])
