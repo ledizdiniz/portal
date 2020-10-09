@@ -19,9 +19,11 @@ autores = mongo.db.autores
 
 @app.route('/artigos', methods=['GET'])
 def get_all_artigos():
-    output = []
-    for q in artigos.find():
-        output.append({ 'id':str(q['_id']) ,'Titulo' : q['titulo'], 'data' : q['data'],'texto' : q['texto'], 'autor' : q['autor']['nome']  })
+
+    output = get_all_artigosapi().json
+    #output = []
+    #for q in artigos.find():
+    #    output.append({ 'id':str(q['_id']) ,'Titulo' : q['titulo'], 'data' : q['data'],'texto' : q['texto'], 'autor' : q['autor']['nome']  })
 
     tam = len(output)
 
@@ -136,7 +138,6 @@ def get_all_artigosapi():
 
 @app.route('/artigosapi/<texto>', methods=['GET'])
 def get_search_artigoapi(texto):
-
     output = []
     for q in artigos.find(
             {"$or": [{"titulo": {'$regex': texto}}, {"texto": {'$regex': texto}}, {"autor.nome": {'$regex': texto}}]}):
@@ -144,12 +145,7 @@ def get_search_artigoapi(texto):
              output.append({'id':str(q['_id']) ,'Titulo': q['titulo'], 'texto': q['texto'], 'autor': q['autor']['nome']})
 
     tam = len(output)
-
-
     return jsonify(output)
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
