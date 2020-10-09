@@ -30,11 +30,17 @@ def get_all_artigos():
 @app.route('/artigos/<texto>', methods=['GET'])
 def get_search_artigo(texto):
 
-    output = []
-    for q in artigos.find(
-            {"$or": [{"titulo": {'$regex': texto}}, {"texto": {'$regex': texto}}, {"autor.nome": {'$regex': texto}}]}):
 
-             output.append({'id':str(q['_id']) ,'Titulo': q['titulo'], 'texto': q['texto'], 'autor': q['autor']['nome']})
+
+    output =get_search_artigoapi(texto).json
+
+
+    print(get_search_artigoapi(texto).json)
+    #print(output.dump(output))
+    #for q in artigos.find(
+     #       {"$or": [{"titulo": {'$regex': texto}}, {"texto": {'$regex': texto}}, {"autor.nome": {'$regex': texto}}]}):
+
+      #       output.append({'id':str(q['_id']) ,'Titulo': q['titulo'], 'texto': q['texto'], 'autor': q['autor']['nome']})
 
     tam = len(output)
     print(tam)
@@ -125,8 +131,11 @@ def inserirautor():
 def inicio():
       return redirect('/artigos')
 
+#### -----api cruas em json      #### -----api cruas em json      #### -----api cruas em json
+#### -----api cruas em json      #### -----api cruas em json      #### -----api cruas em json
+#### -----api cruas em json      #### -----api cruas em json      #### -----api cruas em json
 
-#### -----api cruas em json
+
 
 @app.route('/artigosapi', methods=['GET'])
 def get_all_artigosapi():
@@ -146,7 +155,8 @@ def get_search_artigoapi(texto):
              output.append({'id':str(q['_id']) ,'Titulo': q['titulo'], 'texto': q['texto'], 'autor': q['autor']['nome']})
 
     tam = len(output)
-    print(tam)
+
+
     return jsonify(output)
 
 
