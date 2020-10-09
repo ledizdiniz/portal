@@ -22,7 +22,7 @@ def get_all_artigos():
 
     output = get_all_artigosapi().json
     tam = len(output)
-    return render_template('lista2.html', titulo='Blog', lista=output,tamanho=tam)
+    return render_template('lista2.html', titulo='Blog', lista=output)
 
 @app.route('/artigos/<texto>', methods=['GET'])
 def get_search_artigo(texto):
@@ -30,7 +30,7 @@ def get_search_artigo(texto):
     output =get_search_artigoapi(texto).json
     tam = len(output)
 
-    return render_template('lista2.html', titulo='Blog', lista=output,tamanho = tam )
+    return render_template('lista2.html', titulo='Blog', lista=output )
 
 @app.route('/remover/<id>')
 def get_remover_artigos(id):
