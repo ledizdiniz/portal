@@ -30,20 +30,9 @@ def get_all_artigos():
 @app.route('/artigos/<texto>', methods=['GET'])
 def get_search_artigo(texto):
 
-
-
     output =get_search_artigoapi(texto).json
-
-
-    print(get_search_artigoapi(texto).json)
-    #print(output.dump(output))
-    #for q in artigos.find(
-     #       {"$or": [{"titulo": {'$regex': texto}}, {"texto": {'$regex': texto}}, {"autor.nome": {'$regex': texto}}]}):
-
-      #       output.append({'id':str(q['_id']) ,'Titulo': q['titulo'], 'texto': q['texto'], 'autor': q['autor']['nome']})
-
     tam = len(output)
-    print(tam)
+
     return render_template('lista2.html', titulo='Blog', lista=output,tamanho = tam )
 
 @app.route('/remover/<id>')
